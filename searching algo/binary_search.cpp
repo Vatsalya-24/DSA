@@ -25,10 +25,6 @@ int main(){
         last=mid+1;
         mid=(first+last)/2;
     }
-    
-
     }
-
-
     return 0;
 }
