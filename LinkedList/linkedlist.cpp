@@ -50,6 +50,22 @@ void insert_any_position(int value, int pos){
     newnode->next=temp->next;
     temp->next=newnode;
 }
+void pop_end(){
+    Node* temp=head;
+    if(temp==NULL){
+        cout<<"underflow";
+
+    }
+    while(temp->next!=NULL ){
+            temp=temp->next;
+    }
+    temp->next=NULL;
+    
+    
+}
+
+
+
 void print(){
     Node *temp=head;
     while(temp!=NULL || temp->next!=NULL){
@@ -65,6 +81,7 @@ int main(){
     insert_end(4);
     insert_end(5);
     insert_any_position(9,3);
+    pop_end();
     print();
     
 
