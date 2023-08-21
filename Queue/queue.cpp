@@ -3,7 +3,7 @@
 
 using namespace std;
 int front = -1;
-int rear = -1; // Changed variable name from "end" to "rear"
+int rear = -1; 
 int queue[10];
 
 void enqueue(int value) {
