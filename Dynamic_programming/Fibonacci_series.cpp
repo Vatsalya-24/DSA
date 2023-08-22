@@ -2,13 +2,13 @@
 
 using namespace std;
  
-int fib(int n)
+int fib(int n)                        // recursion method
 {
     if (n <= 1)
         return n;
     return fib(n - 1) + fib(n - 2);
 }
-void fib1(int n)
+void fib1(int n)                     // Linear Approch
 {
     int f[n];
     f[0]=0;
