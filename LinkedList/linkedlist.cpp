@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include <cstdlib> // For exit() function
 using namespace std;
 
 class Node{
@@ -8,83 +9,75 @@ class Node{
         Node* next;
 
 };
+
 Node *head;
+
 void insert_end(int value){
-    Node *newnode=new Node();
-    newnode->data=value;
-    if(head==NULL){
-        head=newnode;
+    Node *newnode = new Node();
+    newnode->data = value;
+    newnode->next = NULL; // Initialize the next pointer
+    if(head == NULL){
+        head = newnode;
         return;
     }
-    Node *temp=head;
-    while(temp->next!=NULL){
-        temp=temp->next;
-        
+    Node *temp = head;
+    while(temp->next != NULL){
+        temp = temp->next;
     }
-    temp->next=newnode;
-   
-  
+    temp->next = newnode;
 }
+
 void insert_beg(int value){
-    Node* newnode= new Node();
-    Node *temp=head;
-    newnode->data=value;
-    if(head==NULL){
-        head=newnode;
-        return;
-    }
-    newnode->next=temp;
-    head=newnode;
+    Node* newnode = new Node();
+    newnode->data = value;
+    newnode->next = head; // Set the new node's next to the current head
+    head = newnode;
 }
+
 void insert_any_position(int value, int pos){
-    Node* newnode= new Node();
-    Node *temp=head;
-    newnode->data=value;
-    if(head==NULL){
-        head=newnode;
+    Node* newnode = new Node();
+    newnode->data = value;
+    newnode->next = NULL; // Initialize the next pointer
+    if(head == NULL){
+        head = newnode;
         return;
     }
-    for(int i=1;i<pos-1;i++){
-        temp=temp->next;
+    Node *temp = head;
+    for(int i = 1; i < pos - 1; i++){
+        temp = temp->next;
     }
-    newnode->next=temp->next;
-    temp->next=newnode;
-}
-void pop_end(){
-    Node* temp=head;
-    if(temp==NULL){
-        cout<<"underflow";
-
-    }
-    while(temp->next!=NULL ){
-            temp=temp->next;
-    }
-    temp->next=NULL;
-    
-    
+    newnode->next = temp->next;
+    temp->next = newnode;
 }
 
-
+void pop() {
+    if (head == NULL) {
+        cout << "\nStack Underflow" << endl;
+        exit(1);
+    } else {
+        Node* temp = head;
+        head = head->next;
+        free(temp); // Free the memory of the popped node
+    }
+}
 
 void print(){
-    Node *temp=head;
-    while(temp!=NULL || temp->next!=NULL){
-        cout<<temp->data;
-        temp=temp->next;
+    Node *temp = head;
+    while(temp != NULL){
+        cout << temp->data << " ";
+        temp = temp->next;
     }
 }
+
 int main(){
-    Node obj;
     insert_end(2);
     insert_end(3);
     insert_beg(6);
     insert_end(4);
     insert_end(5);
-    insert_any_position(9,3);
-    pop_end();
+    insert_any_position(9, 3);
+    pop(); // Corrected function call
     print();
-    
-
 
     return 0;
 }
