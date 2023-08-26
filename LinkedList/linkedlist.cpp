@@ -50,14 +50,32 @@ void insert_any_position(int value, int pos){
     temp->next = newnode;
 }
 
-void pop() {
+void pop_beg() {
     if (head == NULL) {
         cout << "\nStack Underflow" << endl;
         exit(1);
     } else {
         Node* temp = head;
         head = head->next;
-        free(temp); // Free the memory of the popped node
+        free(temp); 
+    }
+}
+void pop_end(){
+    if(head ==NULL){
+        cout<< "\n stack Underflow " << endl;
+        exit(1);
+    }
+     else if (head->next == NULL) {
+        
+        free(head);
+        head = NULL;
+    } else {
+        Node* temp = head;
+        while (temp->next->next != NULL) {
+            temp = temp->next;
+        }
+        free(temp->next); // Free the last node
+        temp->next = NULL;
     }
 }
 
@@ -76,7 +94,8 @@ int main(){
     insert_end(4);
     insert_end(5);
     insert_any_position(9, 3);
-    pop(); // Corrected function call
+    pop_beg(); // Corrected function call
+    pop_end();
     print();
 
     return 0;
