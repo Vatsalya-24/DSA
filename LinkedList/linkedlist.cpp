@@ -7,7 +7,6 @@ class Node{
     public:
         int data;
         Node* next;
-
 };
 
 Node *head;
@@ -60,13 +59,12 @@ void pop_beg() {
         free(temp); 
     }
 }
+
 void pop_end(){
-    if(head ==NULL){
-        cout<< "\n stack Underflow " << endl;
+    if (head == NULL) {
+        cout << "\nStack Underflow" << endl;
         exit(1);
-    }
-     else if (head->next == NULL) {
-        
+    } else if (head->next == NULL) {
         free(head);
         head = NULL;
     } else {
@@ -74,8 +72,33 @@ void pop_end(){
         while (temp->next->next != NULL) {
             temp = temp->next;
         }
-        free(temp->next); // Free the last node
+        free(temp->next);
         temp->next = NULL;
+    }
+}
+
+void pop_at_any(int n){
+    int count = 0;
+    if (head == NULL){
+        cout << "\nStack Underflow" << endl;
+        exit(1);
+    }
+    Node* temp = head;
+    Node* prev = NULL;
+    while (temp != NULL && count != n) {
+        prev = temp;
+        temp = temp->next;
+        count++;
+    }
+    if (temp == NULL) {
+        cout << "Position not found." << endl;
+        return;
+    }
+    if (prev == NULL) {
+        pop_beg();
+    } else {
+        prev->next = temp->next;
+        free(temp);
     }
 }
 
@@ -94,8 +117,9 @@ int main(){
     insert_end(4);
     insert_end(5);
     insert_any_position(9, 3);
-    pop_beg(); // Corrected function call
+    pop_beg();
     pop_end();
+    pop_at_any(3);
     print();
 
     return 0;
